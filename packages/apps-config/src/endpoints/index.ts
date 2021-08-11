@@ -12,7 +12,6 @@ export function createWsEndpoints (t: TFunction, firstOnly?: boolean): LinkOptio
   return [
     ...createCustom(t),
     {
-      isDevelopment: true,
       isDisabled: false,
       isHeader: true,
       isSpaced: true,

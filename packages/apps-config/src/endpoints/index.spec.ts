@@ -17,7 +17,7 @@ describe('WS urls are all valid', (): void => {
     .filter(({ value }) =>
       value &&
       isString(value) &&
-      !value.includes('oraclenode.bittensor.com')
+      !value.includes('127.0.0.1')
     )
     .map(({ text, value }): Endpoint => ({
       name: text as string,

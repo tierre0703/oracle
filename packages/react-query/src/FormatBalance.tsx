@@ -46,7 +46,7 @@ function getFormat (registry: Registry, formatIndex = 0): [number, string] {
 }
 
 function createElement (prefix: string, postfix: string, unit: string, label = '', isShort = false): React.ReactNode {
-  return <>{`${prefix}${isShort ? '' : '.'}`}{!isShort && <span className='ui--FormatBalance-postfix'>{`0000${postfix || ''}`.slice(-4)}</span>}<span className='ui--FormatBalance-unit'> {unit}</span>{label}</>;
+  return <>{`${prefix}${isShort ? '' : '.'}`}{!isShort && <span className='ui--FormatBalance-postfix'>{`0000${postfix || ''}`.slice(-4)}</span>}<span className='ui--FormatBalance-unit'> τ</span>{label}</>;
 }
 
 function splitFormat (value: string, label?: string, isShort?: boolean): React.ReactNode {
@@ -118,7 +118,6 @@ export default React.memo(styled(FormatBalance)`
 
   .ui--FormatBalance-unit {
     font-size: 0.825em;
-    text-transform: uppercase;
   }
 
   .ui--FormatBalance-value {

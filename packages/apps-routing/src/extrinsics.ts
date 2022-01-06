@@ -11,7 +11,8 @@ export default function create (t: TFunction): Route {
     Component,
     display: {
       needsAccounts: true,
-      needsApi: []
+      needsApi: [],
+      needsSudo: true
     },
     group: 'developer',
     icon: 'envelope-open-text',

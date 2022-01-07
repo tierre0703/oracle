@@ -66,7 +66,7 @@ export function createDev (t: TFunction): LinkOption[] {
       info: 'local',
       text: t('rpc.dev.local', 'Bittensor Oracle', { ns: 'apps-config' }),
       textBy: 'oraclenode.bittensor.com',
-      value: 'wss://oraclenode.bittensor.com'
+      value: 'wss://explorernode.nakamoto.opentensor.ai'
     }
   ];
 }

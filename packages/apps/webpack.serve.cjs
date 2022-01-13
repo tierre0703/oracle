@@ -14,7 +14,8 @@ module.exports = merge(
     devServer: {
       open: false,
       port: 3000,
-      static: path.resolve(__dirname, 'build')
+      static: path.resolve(__dirname, 'build'),
+      allowedHosts: ['.opentensor.ai']
     },
     plugins: [
       new HtmlWebpackPlugin({

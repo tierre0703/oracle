@@ -283,7 +283,8 @@ export default function useSortedTargets (favorites: string[], withLedger: boole
     api.query.staking.maxValidatorsCount,
     api.query.staking.minNominatorBond,
     api.query.staking.minValidatorBond,
-    api.query.balances?.totalIssuance
+    //api.query.balances?.totalIssuance
+    api.query.subtensorModule?.totalIssuance
   ], transformMulti);
   const electedInfo = useCall<DeriveStakingElected>(api.derive.staking.electedInfo, [{ ...DEFAULT_FLAGS_ELECTED, withLedger }]);
   const waitingInfo = useCall<DeriveStakingWaiting>(api.derive.staking.waitingInfo, [{ ...DEFAULT_FLAGS_WAITING, withLedger }]);

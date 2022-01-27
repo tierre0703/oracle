@@ -9,7 +9,8 @@ function WarmUp (): React.ReactElement {
   const { api, isApiReady } = useApi();
   const indexes = useCall<unknown>(isApiReady && api.derive.accounts?.indexes);
   const registrars = useCall<unknown>(isApiReady && api.query.identity?.registrars);
-  const issuance = useCall<unknown>(isApiReady && api.query.balances?.totalIssuance);
+  //const issuance = useCall<unknown>(isApiReady && api.query.balances?.totalIssuance);
+  const issuance = useCall<unknown>(isApiReady && api.query.subtensorModule?.totalIssuance);
   const historyDepth = useCall<unknown>(isApiReady && api.query.staking?.historyDepth);
   const [hasValues, setHasValues] = useState(false);
 

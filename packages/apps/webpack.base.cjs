@@ -75,7 +75,7 @@ function createWebpack (context, mode = 'production') {
               options: {
                 esModule: false,
                 limit: 10000,
-                name: 'static/[name].[contenthash:8].[ext]'
+                name: 'static/[name].[ext]'
               }
             }
           ]
@@ -88,7 +88,7 @@ function createWebpack (context, mode = 'production') {
               loader: require.resolve('file-loader'),
               options: {
                 esModule: false,
-                name: 'static/[name].[contenthash:8].[ext]'
+                name: 'static/[name].[ext]'
               }
             }
           ]
@@ -136,7 +136,7 @@ function createWebpack (context, mode = 'production') {
     },
     output: {
       chunkFilename: '[name].[chunkhash:8].js',
-      filename: '[name].[contenthash:8].js',
+      filename: '[name].js',
       globalObject: '(typeof self !== \'undefined\' ? self : this)',
       path: path.join(context, 'build'),
       publicPath: ''
@@ -162,7 +162,7 @@ function createWebpack (context, mode = 'production') {
       }),
       new webpack.optimize.SplitChunksPlugin(),
       new MiniCssExtractPlugin({
-        filename: '[name].[contenthash:8].css'
+        filename: '[name].css'
       })
     ].concat(plugins),
     resolve: {

@@ -13,7 +13,8 @@ export default function create (t: TFunction): Route {
       needsAccounts: true,
       needsApi: [
         'tx.contracts.instantiateWithCode'
-      ]
+      ],
+      needsSudo: true
     },
     group: 'developer',
     icon: 'compress',

@@ -42,7 +42,8 @@ function calcInflation (api: ApiPromise, totalStaked: BN, totalIssuance: BN, num
 
 function useInflationImpl (totalStaked?: BN): Inflation {
   const { api } = useApi();
-  const totalIssuance = useCall<BN>(api.query.balances?.totalIssuance);
+  //const totalIssuance = useCall<BN>(api.query.balances?.totalIssuance);
+  const totalIssuance = useCall<BN>(api.query.subtensorModule?.totalIssuance);
   const auctionCounter = useCall<BN>(api.query.auctions?.auctionCounter);
   const [state, setState] = useState<Inflation>(EMPTY);
 

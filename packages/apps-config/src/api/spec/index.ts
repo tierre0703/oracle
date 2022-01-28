@@ -118,6 +118,7 @@ import zCloak from './zCloak';
 import zeitgeist from './zeitgeist';
 import zenlink from './zenlink';
 import zero from './zero';
+import nodesubtensor from './node-subtensor';
 
 // NOTE: The mapping is done from specName in state.getRuntimeVersion
 const spec: Record<string, OverrideBundleDefinition> = {
@@ -256,7 +257,8 @@ const spec: Record<string, OverrideBundleDefinition> = {
   vodka,
   'web3games-node': web3games,
   'zcloak-network': zCloak,
-  zeitgeist: zeitgeist
+  zeitgeist: zeitgeist,
+  'node-subtensor': nodesubtensor
 };
 
 export default spec;

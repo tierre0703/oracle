@@ -21,7 +21,7 @@ const FACTORS = [0.2126, 0.7152, 0.0722];
 const PARTS = [0, 2, 4];
 const VERY_DARK = 16;
 
-const defaultHighlight = '#f19135'; // '#f19135'; // #999
+const defaultHighlight = '#252525'; // '#252525'; // #999
 
 function getHighlight (uiHighlight: string | undefined): string {
   return (uiHighlight || defaultHighlight);
@@ -255,58 +255,7 @@ export default createGlobalStyle<Props & ThemeProps>(({ theme, uiHighlight }: Pr
     }
   }
 
-  .ui--Popup .ui--Button.isOpen:not(.isDisabled):not(.isReadOnly) {
-    background: ${getHighlight(uiHighlight)} !important;
-    color: ${getContrast(uiHighlight)} !important;
-
-    .ui--Icon {
-      background: transparent !important;
-      color: ${getContrast(uiHighlight)} !important;
-    }
-  }
-
-
-  .ui--Menu {
-    .ui--Menu__Item:hover {
-       background: ${hexToRGB(getHighlight(uiHighlight), '.1')};
-    }
-
-    .ui--Toggle.isChecked .ui--Toggle-Slider {
-      background: ${getHighlight(uiHighlight)};
-
-      &::before {
-        border-color: ${getHighlight(uiHighlight)};
-      }
-    }
-  }
-
-  .ui--Sort {
-    .ui--Labelled.ui--Dropdown:hover {
-     .ui.selection.dropdown {
-        border-color: ${getHighlight(uiHighlight)};
-
-       .visible.menu {
-         border: 1px solid ${getHighlight(uiHighlight)};
-        }
-      }
-    }
-
-    button:hover {
-      border-color: ${getHighlight(uiHighlight)};
-    }
-
-    button:hover,
-    .ui--Labelled.ui--Dropdown:hover {
-      &::after {
-        background-color:  ${getHighlight(uiHighlight)};
-      }
-    }
-
-    .arrow.isActive {
-      color:  ${getHighlight(uiHighlight)};
-      opacity: 1;
-    }
-  }
+  
 
   .theme--dark,
   .theme--light {
@@ -337,25 +286,6 @@ export default createGlobalStyle<Props & ThemeProps>(({ theme, uiHighlight }: Pr
         }
       }
     }
-  }
-
-  .ui--ExpandButton:hover {
-    border-color: ${getHighlight(uiHighlight)} !important;
-
-    .ui--Icon {
-      color: ${getHighlight(uiHighlight)} !important;
-    }
-  }
-
-  .ui--Tag.themeColor.lightTheme,
-  .ui--InputTags.lightTheme .ui.label {
-    background: ${hexToRGB(getHighlight(uiHighlight), '0.08')};
-    color: ${countBrightness(uiHighlight) > BRIGHTNESS ? '#424242' : getHighlight(uiHighlight)};
-  }
-
-  .ui--Tag.themeColor.darkTheme,
-  .ui--InputTags.darkTheme .ui.label {
-    color: ${countBrightness(uiHighlight) > BRIGHTNESS ? getHighlight(uiHighlight) : '#fff'};
   }
 
   #root {

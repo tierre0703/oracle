@@ -26,30 +26,22 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
   return (
     <div className={className}>
       <div
-        className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} highlight--color-contrast`}
-        onClick={toggleEndpoints}
+        className={`apps--SideBar-logo-inner highlight--color-contrast`}
       >
         <ChainImg />
         <div className='info media--1000'>
-          <Chain className='chain' />
+          <div> Bittensor Oracle </div>
           {runtimeVersion && (
-            <div className='runtimeVersion'>{runtimeVersion.specName.toString()}/{runtimeVersion.specVersion.toNumber()}</div>
+            <div className='runtimeVersion'>{'bittensor chain explorer'}/{runtimeVersion.specVersion.toNumber()}</div>
           )}
           <BestNumber
             className='bestNumber'
             label='#'
           />
         </div>
-        {canToggle && (
-          <Icon
-            className='dropdown'
-            icon={isEndpointsVisible ? 'caret-right' : 'caret-down'}
-          />
-        )}
+
       </div>
-      {isEndpointsVisible && (
-        <Endpoints onClose={toggleEndpoints} />
-      )}
+
     </div>
   );
 }

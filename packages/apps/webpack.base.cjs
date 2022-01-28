@@ -105,7 +105,7 @@ function createWebpack (context, mode = 'production') {
       ]
     },
     node: {
-      __dirname: true,
+      __dirname: false,
       __filename: false
     },
     optimization: {

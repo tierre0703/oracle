@@ -17,7 +17,6 @@ function TotalIssuance ({ children, className = '', label }: Props): React.React
   const { api } = useApi();
 
   const totalIssuance = useCall<string>(api.query.subtensorModule?.totalIssuance);
-  console.log(api.query);
 
   return (
     <div className={className}>

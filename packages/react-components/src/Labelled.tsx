@@ -50,10 +50,6 @@ export default React.memo(styled(Labelled)`
     display: block;
     position: relative;
 
-    label {
-      padding-right: 1rem;
-    }
-
     .ui--CopyButton {
       position: absolute;
       top: 0.9rem;
@@ -61,6 +57,7 @@ export default React.memo(styled(Labelled)`
     }
 
     .withEllipsis {
+      display: inline;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -90,7 +87,6 @@ export default React.memo(styled(Labelled)`
 
         > label {
           left: 3.55rem;
-          right: 0;
           text-align: left;
         }
       }
@@ -118,7 +114,7 @@ export default React.memo(styled(Labelled)`
         .ui.selection.dropdown {
           &:not(.floating) {
             padding-left: 1.45rem;
-            padding-top: 1.75rem;
+            padding-top: 1.6rem;
           }
 
           &.floating {

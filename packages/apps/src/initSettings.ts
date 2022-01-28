@@ -55,7 +55,7 @@ function getApiUrl (): string {
     ? settings.apiUrl // keep as-is
     : fallbackUrl
       ? fallbackUrl.value // grab the fallback
-      : 'ws://127.0.0.1:9944'; // nothing found, go local
+      : 'wss://explorernode.nakamoto.opentensor.ai'; // nothing found, go local
 }
 
 // There cannot be a Substrate Connect light client default (expect only jrpc EndpointType)

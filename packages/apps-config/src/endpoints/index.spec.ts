@@ -34,7 +34,7 @@ describe('urls are sorted', (): void => {
   let hasDevelopment = false;
   let lastHeader = '';
   const filtered = allEndpoints.filter(({ isHeader, text }): boolean => {
-    hasDevelopment = hasDevelopment || (!!isHeader && text === 'Development');
+    hasDevelopment = hasDevelopment || (!!isHeader && text === 'Bittensor Chain Explorer');
 
     return !hasDevelopment;
   });

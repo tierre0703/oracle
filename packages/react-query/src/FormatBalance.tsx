@@ -55,7 +55,7 @@ function splitFormat (value: string, label?: LabelPost, isShort?: boolean): Reac
   const [prefix, postfixFull] = value.split('.');
   const [postfix, unit] = postfixFull.split(' ');
 
-  return createElement(prefix, postfix, unit, label, isShort);
+  return createElement(prefix, postfix, 'τ', label, isShort);
 }
 
 function applyFormat (value: Compact<any> | BN | string, [decimals, token]: [number, string], withCurrency = true, withSi?: boolean, _isShort?: boolean, labelPost?: LabelPost): React.ReactNode {
@@ -123,7 +123,6 @@ export default React.memo(styled(FormatBalance)`
 
   .ui--FormatBalance-unit {
     font-size: 0.825em;
-    text-transform: uppercase;
   }
 
   .ui--FormatBalance-value {

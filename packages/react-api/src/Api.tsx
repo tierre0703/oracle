@@ -53,7 +53,7 @@ interface ChainData {
   systemVersion: string;
 }
 
-export const DEFAULT_DECIMALS = registry.createType('u32', 12);
+export const DEFAULT_DECIMALS = registry.createType('u32', 9);
 export const DEFAULT_SS58 = registry.createType('u32', addressDefaults.prefix);
 export const DEFAULT_AUX = ['Aux1', 'Aux2', 'Aux3', 'Aux4', 'Aux5', 'Aux6', 'Aux7', 'Aux8', 'Aux9'];
 
@@ -113,7 +113,7 @@ async function retrieve (api: ApiPromise, injectedPromise: Promise<InjectedExten
     injectedAccounts,
     properties: registry.createType('ChainProperties', {
       ss58Format: api.registry.chainSS58,
-      tokenDecimals: api.registry.chainDecimals,
+      tokenDecimals: [DEFAULT_DECIMALS.toNumber()],
       tokenSymbol: api.registry.chainTokens
     }),
     systemChain: (systemChain || '<unknown>').toString(),
@@ -142,7 +142,7 @@ async function loadOnReady (api: ApiPromise, endpoint: LinkOption | null, inject
 
   // first setup the UI helpers
   formatBalance.setDefaults({
-    decimals: tokenDecimals.map((b) => b.toNumber()),
+    decimals: tokenDecimals.map((b) => DEFAULT_DECIMALS.toNumber()),
     unit: tokenSymbol[0].toString()
   });
   TokenUnit.setAbbr(tokenSymbol[0].toString());

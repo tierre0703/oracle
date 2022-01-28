@@ -255,8 +255,6 @@ export default createGlobalStyle<Props & ThemeProps>(({ theme, uiHighlight }: Pr
     }
   }
 
-  
-
   .theme--dark,
   .theme--light {
     .ui--Tabs .tabLinkActive .tabLinkText::after{

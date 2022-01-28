@@ -63,14 +63,6 @@ function applyFormat (value: Compact<any> | BN | string, [decimals, token]: [num
   const isShort = _isShort || (withSi && prefix.length >= K_LENGTH);
   const unitPost = withCurrency ? token : '';
 
-  if (prefix.length > M_LENGTH) {
-    const [major, rest] = formatBalance(value, { decimals, withUnit: false }).split('.');
-    const minor = rest.substr(0, 4);
-    const unit = rest.substr(4);
-
-    return <>{major}.<span className='ui--FormatBalance-postfix'>{minor}</span><span className='ui--FormatBalance-unit'>{unit}{unit ? unitPost : ` ${unitPost}`}</span>{labelPost || ''}</>;
-  }
-
   return createElement(prefix, postfix, unitPost, labelPost, isShort);
 }
 

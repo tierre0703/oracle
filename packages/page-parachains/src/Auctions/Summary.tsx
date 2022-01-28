@@ -1,4 +1,4 @@
-// Copyright 2017-2021 @polkadot/app-parachains authors & contributors
+// Copyright 2017-2022 @polkadot/app-parachains authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { u32 } from '@polkadot/types';
@@ -24,8 +24,7 @@ function Summary ({ auctionInfo, className, lastWinners }: Props): React.ReactEl
   const { t } = useTranslation();
   const { api } = useApi();
   const bestNumber = useBestNumber();
-  //const totalIssuance = useCall<Balance>(api.query.balances?.totalIssuance);
-  const totalIssuance = useCall<Balance>(api.query.subtensorModule?.totalIssuance);
+  const totalIssuance = useCall<Balance>(api.query.balances?.totalIssuance);
 
   return (
     <SummaryBox className={className}>

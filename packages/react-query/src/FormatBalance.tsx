@@ -1,15 +1,15 @@
-// Copyright 2017-2021 @polkadot/react-query authors & contributors
+// Copyright 2017-2022 @polkadot/react-query authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type BN from 'bn.js';
 import type { Compact } from '@polkadot/types';
 import type { Registry } from '@polkadot/types/types';
+import type { BN } from '@polkadot/util';
 
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { useApi } from '@polkadot/react-hooks';
-import { formatBalance } from '@polkadot/util';
+import { formatBalance, isString } from '@polkadot/util';
 
 import { useTranslation } from './translate';
 
@@ -20,7 +20,7 @@ interface Props {
   formatIndex?: number;
   isShort?: boolean;
   label?: React.ReactNode;
-  labelPost?: string;
+  labelPost?: LabelPost;
   value?: Compact<any> | BN | string | null | 'all';
   valueFormatted?: string;
   withCurrency?: boolean;
@@ -30,6 +30,8 @@ interface Props {
 // for million, 2 * 3-grouping + comma
 const M_LENGTH = 6 + 1;
 const K_LENGTH = 3 + 1;
+
+type LabelPost = string | React.ReactNode
 
 function getFormat (registry: Registry, formatIndex = 0): [number, string] {
   const decimals = registry.chainDecimals;
@@ -45,18 +47,18 @@ function getFormat (registry: Registry, formatIndex = 0): [number, string] {
   ];
 }
 
-function createElement (prefix: string, postfix: string, unit: string, label = '', isShort = false): React.ReactNode {
-  return <>{`${prefix}${isShort ? '' : '.'}`}{!isShort && <span className='ui--FormatBalance-postfix'>{`0000${postfix || ''}`.slice(-4)}</span>}<span className='ui--FormatBalance-unit'> τ</span>{label}</>;
+function createElement (prefix: string, postfix: string, unit: string, label: LabelPost = '', isShort = false): React.ReactNode {
+  return <>{`${prefix}${isShort ? '' : '.'}`}{!isShort && <span className='ui--FormatBalance-postfix'>{`0000${postfix || ''}`.slice(-4)}</span>}<span className='ui--FormatBalance-unit'> {unit}</span>{label}</>;
 }
 
-function splitFormat (value: string, label?: string, isShort?: boolean): React.ReactNode {
+function splitFormat (value: string, label?: LabelPost, isShort?: boolean): React.ReactNode {
   const [prefix, postfixFull] = value.split('.');
   const [postfix, unit] = postfixFull.split(' ');
 
-  return createElement(prefix, postfix, 'τ', label, isShort);
+  return createElement(prefix, postfix, unit, label, isShort);
 }
 
-function applyFormat (value: Compact<any> | BN | string, [decimals, token]: [number, string], withCurrency = true, withSi?: boolean, _isShort?: boolean, labelPost?: string): React.ReactNode {
+function applyFormat (value: Compact<any> | BN | string, [decimals, token]: [number, string], withCurrency = true, withSi?: boolean, _isShort?: boolean, labelPost?: LabelPost): React.ReactNode {
   const [prefix, postfix] = formatBalance(value, { decimals, forceUnit: '-', withSi: false }).split('.');
   const isShort = _isShort || (withSi && prefix.length >= K_LENGTH);
   const unitPost = withCurrency ? token : '';
@@ -87,14 +89,17 @@ function FormatBalance ({ children, className = '', format, formatIndex, isShort
       {label ? <>{label}&nbsp;</> : ''}
       <span
         className='ui--FormatBalance-value'
-        data-testid='balance-summary'>{
+        data-testid='balance-summary'
+      >{
           valueFormatted
             ? splitFormat(valueFormatted, labelPost, isShort)
             : value
               ? value === 'all'
-                ? t<string>('everything{{labelPost}}', { replace: { labelPost } })
+                ? <>{t<string>('everything')}{labelPost || ''}</>
                 : applyFormat(value, formatInfo, withCurrency, withSi, isShort, labelPost)
-              : `-${labelPost || ''}`
+              : isString(labelPost)
+                ? `-${labelPost}`
+                : labelPost
         }</span>{children}
     </div>
   );
@@ -118,6 +123,7 @@ export default React.memo(styled(FormatBalance)`
 
   .ui--FormatBalance-unit {
     font-size: 0.825em;
+    text-transform: uppercase;
   }
 
   .ui--FormatBalance-value {

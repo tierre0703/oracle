@@ -1,4 +1,4 @@
-// Copyright 2017-2021 @polkadot/apps authors & contributors
+// Copyright 2017-2022 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { RuntimeVersion } from '@polkadot/types/interfaces';
@@ -26,22 +26,30 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
   return (
     <div className={className}>
       <div
-        className={`apps--SideBar-logo-inner highlight--color-contrast`}
+        className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} highlight--color-contrast`}
+        onClick={toggleEndpoints}
       >
         <ChainImg />
         <div className='info media--1000'>
-          <div> Bittensor Oracle </div>
+          <Chain className='chain' />
           {runtimeVersion && (
-            <div className='runtimeVersion'>{'bittensor chain explorer'}/{runtimeVersion.specVersion.toNumber()}</div>
+            <div className='runtimeVersion'>{runtimeVersion.specName.toString()}/{runtimeVersion.specVersion.toNumber()}</div>
           )}
           <BestNumber
             className='bestNumber'
             label='#'
           />
         </div>
-
+        {canToggle && (
+          <Icon
+            className='dropdown'
+            icon={isEndpointsVisible ? 'caret-right' : 'caret-down'}
+          />
+        )}
       </div>
-
+      {isEndpointsVisible && (
+        <Endpoints onClose={toggleEndpoints} />
+      )}
     </div>
   );
 }

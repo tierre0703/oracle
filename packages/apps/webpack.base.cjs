@@ -1,4 +1,4 @@
-// Copyright 2017-2021 @polkadot/apps authors & contributors
+// Copyright 2017-2022 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 /* eslint-disable camelcase */
@@ -75,7 +75,7 @@ function createWebpack (context, mode = 'production') {
               options: {
                 esModule: false,
                 limit: 10000,
-                name: 'static/[name].[ext]'
+                name: 'static/[name].[contenthash:8].[ext]'
               }
             }
           ]
@@ -88,7 +88,7 @@ function createWebpack (context, mode = 'production') {
               loader: require.resolve('file-loader'),
               options: {
                 esModule: false,
-                name: 'static/[name].[ext]'
+                name: 'static/[name].[contenthash:8].[ext]'
               }
             }
           ]
@@ -105,7 +105,7 @@ function createWebpack (context, mode = 'production') {
       ]
     },
     node: {
-      __dirname: false,
+      __dirname: true,
       __filename: false
     },
     optimization: {
@@ -136,7 +136,7 @@ function createWebpack (context, mode = 'production') {
     },
     output: {
       chunkFilename: '[name].[chunkhash:8].js',
-      filename: '[name].js',
+      filename: '[name].[contenthash:8].js',
       globalObject: '(typeof self !== \'undefined\' ? self : this)',
       path: path.join(context, 'build'),
       publicPath: ''
@@ -149,7 +149,10 @@ function createWebpack (context, mode = 'production') {
         Buffer: ['buffer', 'Buffer'],
         process: 'process/browser.js'
       }),
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      new webpack.IgnorePlugin({
+        contextRegExp: /moment$/,
+        resourceRegExp: /^\.\/locale$/
+      }),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify(mode),
@@ -159,7 +162,7 @@ function createWebpack (context, mode = 'production') {
       }),
       new webpack.optimize.SplitChunksPlugin(),
       new MiniCssExtractPlugin({
-        filename: '[name].css'
+        filename: '[name].[contenthash:8].css'
       })
     ].concat(plugins),
     resolve: {
@@ -169,7 +172,11 @@ function createWebpack (context, mode = 'production') {
       },
       extensions: ['.js', '.jsx', '.mjs', '.ts', '.tsx'],
       fallback: {
+        assert: require.resolve('assert/'),
         crypto: require.resolve('crypto-browserify'),
+        http: require.resolve('stream-http'),
+        https: require.resolve('https-browserify'),
+        os: require.resolve('os-browserify/browser'),
         path: require.resolve('path-browserify'),
         stream: require.resolve('stream-browserify')
       }
